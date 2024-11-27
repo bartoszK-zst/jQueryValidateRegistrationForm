@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pl">
+
+<head>
+  <title>Formularz</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<style>
+		#registrationForm > fieldset{
+			width: 80%;
+		}
+
+		#registrationForm > fieldset > p{
+			display: flex;
+			width: 100%;
+		}
+
+		#registrationForm label{
+			font-size: large;
+			font-weight: bold;
+			display: block;
+			width: 20%;
+			text-align: end;
+			padding-inline-end: 0.6%;
+		}
+
+		#registrationForm label.error{
+			color: red;
+			background-color: rgb(255, 148, 146);
+			font-size: large;
+			font-weight: bold;
+			text-align: center;
+			vertical-align: middle;
+			margin: auto;
+			padding: 5px;
+			height: max-content;
+			border-radius: 5px;
+			margin-inline-start: 0.6%;
+			word-break:normal;
+			width: 20%;
+		}
+
+		#registrationForm input[type=text], input[type=email], input[type=password], input[type=text], input[type=number]{
+			font-size: medium;
+			font-weight: 500;
+			display: block;
+			width: 60%;
+			text-align: start;
+			padding: 5px;
+		}
+	</style>
+</head>
+
+<body>
+  <header>
+    <!-- place navbar here -->
+  </header>
+  <main>
+    
+    <div class="container-md p-4 mt-5 bg-dark text-white" style="border-radius:0.6em">
+      <form action="#" class="was-validated">
+        <label>Płeć:<br>
+          <div class="form-check">
+            <input type="radio" class="form-check-input" id="PlecM" name="Gender" value="m">
+            <label class="form-check-label" for="PlecM">Mężczyzna</label>
+          </div>
+          <div class="form-check">
+            <input type="radio" class="form-check-input" id="PlecK" name="Gender" value="k">
+            <label class="form-check-label" for="PlecK">Kobieta</label>
+          </div>
+          <div class="form-check">
+            <input type="radio" class="form-check-input" id="PlecB" name="Gender" value="b" checked>
+            <label class="form-check-label" for="PlecB">Wolę nie odpowiadać</label>
+          </div>
+        </label>
+        </div>
+        <div class="mt-2 form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="DaneOsobowe" name="agreement" value="yes" required>
+          <label class="form-check-label" for="DaneOsobowe">Zgadzam się na przetwarzanie moich danych osobowych</label>
+        </div>
+        <button type="submit" class="mt-3 btn btn-primary">Wyślij</button>
+      </form>
+    </div>
+
+
+		<form id="registrationForm" method="get" action="">
+			<fieldset>
+				<legend>Zarejestruj się</legend>
+				<p>
+					<label for="firstName">Imię:</label>
+					<input type="text" name="firstName" id="firstName">
+				</p>
+				<p>
+					<label for="lastName">Nazwisko:</label>
+					<input type="text" name="lastName" id="lastName">
+				</p>
+				<p>
+					<label for="userNickname">Ksywka (wymagane, minimum 5 znaków):</label>
+					<input type="text" name="userNickname" id="userNickname">
+				</p>
+				<p>
+					<label for="age">Wiek:</label>
+					<input type="number" name="age" id="age" step="1" min="1">
+				</p>
+				<p>
+					<label for="email">Adres e-mail:</label>
+					<input type="email" name="email" id="email" minlength="3">
+				</p>
+				<p>
+					<input type="submit" value="Zarejestruj">
+				</p>
+			</fieldset>
+		</form>
+  </main>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.21.0/dist/jquery.validate.min.js"></script>
+
+	<script>
+		$.validator.addMethod('minStrict', function (value, el, param) {
+    return value >= param;
+});
+
+		$("#registrationForm").validate({
+			rules:{
+				firstName: {
+					required: true,
+					minlength: 2
+				},
+				lastName: {
+					required: true,
+					minlength: 2
+				},
+				userNickname: {
+					required: true,
+					minlength: 5
+				},
+				email: {
+					required: true,
+					minlength: 3
+				},
+				age:{
+					required: true,
+					minStrict: 16,
+					number: true
+				}
+			},
+			messages: {
+				firstName: {
+					required: "Proszę wprowadzić imię",
+					minlength: "Wprowadzone imię musi składać się z co najmniej 2 znaków"
+				},
+				lastName: {
+					required: "Proszę wprowadzić nazwisko",
+					minlength: "Wprowadzone nazwisko musi składać się z co najmniej 2 znaków"
+				},
+				userNickname: {
+					required: "Proszę wprowadzić ksywkę",
+					minlength: "Wprowadzona ksywka musi składać się z co najmniej 5 znaków"
+				},
+				email: {
+					required: "Proszę wprowadzić adres e-mail",
+					minlength: "Wprowadzony adres e-mail musi składać się z co najmniej 3 znaków",
+					email: "Twój adres e-mail musi być w formacie nazwa@[nazwa-domeny].[adres-domeny]"
+				},
+				age:{
+					required: "Proszę wprowadzić wiek",
+					minStrict: "Do założenia konta wymagane jest minimum 16 lat",
+					number: "Proszę wprowadzić wiek w postaci liczby"
+				}
+			}
+		});
+	</script>
+</body>
+
+</html>
