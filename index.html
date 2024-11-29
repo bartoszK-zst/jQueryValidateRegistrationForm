@@ -183,6 +183,14 @@ newspaper.click(function(){
   topics.find("input").attr("disabled", !this.checked); // Włączamy/wyłączamy inputy w zależności od stanu checkboxa
 });
 
+$("#userNickname").focus(function(){
+	var firstName = $("#firstName").val();
+	var lastName = $("#lastName").val();
+	if(firstName && lastName && !this.value){
+		this.value = firstName + lastName;
+	}
+});
+
 $("#registrationForm").validate({
   rules:{
 	firstName: {
