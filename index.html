@@ -173,14 +173,12 @@ var newspaper = $("#newspaperAgreement");
 var initial = newspaper.is(":checked");
 var topics = $("#newspaperTopics");
 
-// Ukrywaj lub pokazuj na podstawie stanu checkboxa
-topics.toggleClass("hide", !initial);  // Na początku ustawiamy stan
+topics.toggleClass("hide", !initial);
 var topicsInputs = topics.find("input").attr("disabled", !initial);
 
-// Obsługuje kliknięcie checkboxa
 newspaper.click(function(){
-  topics.toggleClass("hide", !this.checked);  // Dodajemy lub usuwamy klasę hide
-  topics.find("input").attr("disabled", !this.checked); // Włączamy/wyłączamy inputy w zależności od stanu checkboxa
+  topics.toggleClass("hide", !this.checked);
+  topics.find("input").attr("disabled", !this.checked);
 });
 
 $("#userNickname").focus(function(){
@@ -189,6 +187,10 @@ $("#userNickname").focus(function(){
 	if(firstName && lastName && !this.value){
 		this.value = firstName + lastName;
 	}
+});
+
+$.validator.addMethod('minStrict', function (value, el, param) {
+    return value >= param;
 });
 
 $("#registrationForm").validate({
